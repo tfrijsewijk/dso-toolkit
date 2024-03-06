@@ -23,6 +23,7 @@ jobs:
             CI
             DT_REF: ${{ github.ref }}
   Deploy:
+    needs: Build
     runs-on: ubuntu-22.04
     steps:
       - uses: addnab/docker-run-action@v3
