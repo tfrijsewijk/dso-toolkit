@@ -55,8 +55,7 @@ RUN yarn dedupe --check
 RUN (yarn npm audit --all --recursive || true)
 RUN yarn lint
 
-ARG TRAVIS_BRANCH
-ARG TRAVIS_TAG
+ARG DT_REF
 
 RUN yarn build
 
