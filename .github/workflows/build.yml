@@ -1,7 +1,7 @@
-name: Build
+name: CI
 on: [push]
 jobs:
-  Build:
+  CI:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -15,17 +15,14 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v5
         with:
-          # push: true
+          push: true
+          tags: ghcr.io/dso-toolkit/dso-toolkit:latest
           context: .
           cache-from: ghcr.io/dso-toolkit/dso-toolkit:latest
           cache-to: type=inline
           args: |
             CI
             DT_REF: ${{ github.ref }}
-  Deploy:
-    needs: Build
-    runs-on: ubuntu-22.04
-    steps:
       - uses: addnab/docker-run-action@v3
         with:
           registry: ghcr.io

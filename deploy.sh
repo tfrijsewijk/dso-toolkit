@@ -7,12 +7,12 @@ mkdir --parents ~/.ssh
 cat known_hosts >> ~/.ssh/known_hosts
 echo -e "Host ${DT_DEPLOY_HOST}\n\tCheckHostIP no\n" >> ~/.ssh/config
 
-rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive ./storybook/www/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/storybook.dso-toolkit.nl/www/${TRAVIS_BRANCH/\#/_}
-rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive ./packages/react/www/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/react.dso-toolkit.nl/www/${TRAVIS_BRANCH/\#/_}
-rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive ./angular-workspace/www/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/angular.dso-toolkit.nl/www/${TRAVIS_BRANCH/\#/_}
-rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive ./website/www/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/dso-toolkit.nl/www/${TRAVIS_BRANCH/\#/_}
-rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive --exclude 'node_modules' ./packages/dso-toolkit/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/cdn.dso-toolkit.nl/www/dso-toolkit/${TRAVIS_BRANCH/\#/_}
-rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive --exclude 'node_modules' ./packages/core/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/cdn.dso-toolkit.nl/www/@dso-toolkit/core/${TRAVIS_BRANCH/\#/_}
+# rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive ./storybook/www/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/storybook.dso-toolkit.nl/www/${TRAVIS_BRANCH/\#/_}
+# rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive ./packages/react/www/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/react.dso-toolkit.nl/www/${TRAVIS_BRANCH/\#/_}
+# rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive ./angular-workspace/www/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/angular.dso-toolkit.nl/www/${TRAVIS_BRANCH/\#/_}
+# rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive ./website/www/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/dso-toolkit.nl/www/${TRAVIS_BRANCH/\#/_}
+# rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive --exclude 'node_modules' ./packages/dso-toolkit/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/cdn.dso-toolkit.nl/www/dso-toolkit/${TRAVIS_BRANCH/\#/_}
+# rsync --rsh "ssh -p ${DT_DEPLOY_PORT}" --delete --recursive --exclude 'node_modules' ./packages/core/ ${DT_DEPLOY_USER}@${DT_DEPLOY_HOST}:${DT_DEPLOY_ROOT}/cdn.dso-toolkit.nl/www/@dso-toolkit/core/${TRAVIS_BRANCH/\#/_}
 
 # if [ -n "$TRAVIS_TAG" ]
 # then
