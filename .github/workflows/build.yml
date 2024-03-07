@@ -15,7 +15,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v5
         with:
-          push: true
+          # push: true
+          load: true
           tags: ghcr.io/tfrijsewijk/dso-toolkit:latest
           context: .
           cache-from: ghcr.io/tfrijsewijk/dso-toolkit:latest
@@ -27,5 +28,31 @@ jobs:
         with:
           registry: ghcr.io
           image: tfrijsewijk/dso-toolkit:latest
-          options: --env CI --env DT_REF=${{ github.ref }}
+          options:
+            --env CI
+            --env DT_REF=${{ github.ref }}
+            # --env TRAVIS_BRANCH \
+            # --env TRAVIS_BUILD_ID \
+            # --env TRAVIS_BUILD_NUMBER \
+            # --env TRAVIS_COMMIT \
+            # --env TRAVIS_PULL_REQUEST \
+            # --env TRAVIS_PULL_REQUEST_BRANCH \
+            # --volume /home/travis/build/dso-toolkit/dso-toolkit/storybook/cypress-parallel:/usr/src/app/storybook/cypress-parallel \
+          run: yarn e2e
+      - uses: addnab/docker-run-action@v3
+        with:
+          registry: ghcr.io
+          image: tfrijsewijk/dso-toolkit:latest
+          options:
+            --env CI
+            --env DT_REF=${{ github.ref }}
+            # --env DT_PRIVATE_KEY_BASE64 \
+            # --env DT_DEPLOY_HOST \
+            # --env DT_DEPLOY_PORT \
+            # --env DT_DEPLOY_USER \
+            # --env DT_DEPLOY_ROOT \
+            # --env DT_DEPLOY_NPM_TOKEN \
+            # --env GH_TOKEN \
+            # --env TRAVIS_BRANCH \
+            # --env TRAVIS_TAG \
           run: bash deploy.sh
