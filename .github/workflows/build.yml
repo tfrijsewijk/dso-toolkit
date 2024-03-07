@@ -16,16 +16,16 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ghcr.io/dso-toolkit/dso-toolkit:latest
+          tags: ghcr.io/tfrijsewijk/dso-toolkit:latest
           context: .
-          cache-from: ghcr.io/dso-toolkit/dso-toolkit:latest
+          cache-from: ghcr.io/tfrijsewijk/dso-toolkit:latest
           cache-to: type=inline
-          args: |
+          build-args: |
             CI
             DT_REF: ${{ github.ref }}
       - uses: addnab/docker-run-action@v3
         with:
           registry: ghcr.io
-          image: dso-toolkit/dso-toolkit:latest
+          image: tfrijsewijk/dso-toolkit:latest
           options: --env CI --env DT_REF=${{ github.ref }}
           run: bash deploy.sh

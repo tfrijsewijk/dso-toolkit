@@ -29,7 +29,6 @@ docker push ghcr.io/dso-toolkit/dso-toolkit:${TAG} &
 # e2e
 docker run \
   --env CI \
-  --env PERCY_TOKEN \
   --env TRAVIS_BRANCH \
   --env TRAVIS_BUILD_ID \
   --env TRAVIS_BUILD_NUMBER \
