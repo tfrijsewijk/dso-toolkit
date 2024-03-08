@@ -1,5 +1,8 @@
 name: CI
-on: [push]
+on:
+  pull_request:
+  push:
+
 jobs:
   CI:
     runs-on: ubuntu-22.04
@@ -24,6 +27,21 @@ jobs:
           build-args: |
             CI
             DT_REF: ${{ github.ref }}
+      - uses: addnab/docker-run-action@v3
+        if: github.event_name == 'pull_request'
+        with:
+          registry: ghcr.io
+          image: tfrijsewijk/dso-toolkit:latest
+          options:
+            --env CI
+            --env DT_REF=${{ github.ref }}
+            # --env CI \
+            # --env DANGER_GITHUB_API_TOKEN \
+            # --env TRAVIS_PULL_REQUEST \
+            # --env TRAVIS_REPO_SLUG \
+            # --env TRAVIS_JOB_ID \
+            # --env HAS_JOSH_K_SEAL_OF_APPROVAL \
+          run: yarn danger ci
       - uses: addnab/docker-run-action@v3
         with:
           registry: ghcr.io
