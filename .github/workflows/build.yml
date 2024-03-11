@@ -21,7 +21,6 @@ jobs:
         id: dt-ref
         with:
           script: |
-            console.log("test");
             console.log(context);
             if (context.eventName === 'pull_request') {
               // core.exportVariable('DT_REF', github.ref);
@@ -29,9 +28,8 @@ jobs:
             else if (context.eventName === 'push') {
               const branch = context.ref.split('/').reverse()[0];
 
-              console.log(branch);
               if (branch.lastIndexOf('#') === 0) {
-                core.exportVariable('DT_REF', github.ref_name.replace(/#/, '_'));
+                core.exportVariable('DT_REF', branch.replace(/#/, '_'));
               }
               else if (branch === 'master') {
                 core.exportVariable('DT_REF', 'master');
