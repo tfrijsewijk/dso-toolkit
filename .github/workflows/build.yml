@@ -21,6 +21,7 @@ jobs:
         id: dt-ref
         with:
           script: |
+            core.debug(github.ref_name)
             if (github.event_name === 'pull_request') {
               // core.exportVariable('DT_REF', github.ref);
             }
