@@ -7,17 +7,20 @@ jobs:
   CI:
     runs-on: ubuntu-22.04
     steps:
-      - uses: docker/setup-buildx-action@v3
-        name: Set up Docker Buildx
-      - uses: docker/login-action@v3
-        name: Log in to GitHub Container Registry # is dit nog nodig met load: true ?
+      - uses: actions/github-script@v7
+        id: dt-ref
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo $DT_REF;
-        env:
-          DT_REF: ${{ github.ref }}
+          script: |
+            core.exportVariable('DT_REF', "its me");
+      # - uses: docker/setup-buildx-action@v3
+      #   name: Set up Docker Buildx
+      # - uses: docker/login-action@v3
+      #   name: Log in to GitHub Container Registry # is dit nog nodig met load: true ?
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "${{ steps.dt-ref.outputs.result }}";
       # - uses: docker/build-push-action@v5
       #   name: Build and push Docker image
       #   with:
