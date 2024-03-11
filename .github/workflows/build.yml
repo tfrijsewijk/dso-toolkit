@@ -22,7 +22,7 @@ jobs:
         with:
           script: |
             console.log("test");
-            console.log(github);
+            console.log(context);
             if (github.event_name === 'pull_request') {
               // core.exportVariable('DT_REF', github.ref);
             }
