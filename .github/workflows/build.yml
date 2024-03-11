@@ -26,13 +26,16 @@ jobs:
               // core.exportVariable('DT_REF', github.ref);
             }
             else if (context.eventName === 'push') {
-              const branch = context.ref.split('/').reverse()[0];
+              const [branch, type] = context.ref.split('/').reverse();
 
-              if (branch.lastIndexOf('#') === 0) {
+              if (type === 'heads' && branch.lastIndexOf('#') === 0) {
                 core.exportVariable('DT_REF', branch.replace(/#/, '_'));
               }
-              else if (branch === 'master') {
+              else if (type === 'heads' && branch === 'master') {
                 core.exportVariable('DT_REF', 'master');
+              }
+              else if (type === 'tags' && branch[0] === 'v') {
+                core.exportVariable('DT_REF', branch.substring(1));
               }
             }
       # - uses: docker/setup-buildx-action@v3
