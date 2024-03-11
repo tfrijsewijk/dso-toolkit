@@ -20,7 +20,7 @@ jobs:
       #     registry: ghcr.io
       #     username: ${{ github.actor }}
       #     password: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo "${{ steps.dt-ref.outputs.result }}";
+      - run: echo $DT_REF;
       # - uses: docker/build-push-action@v5
       #   name: Build and push Docker image
       #   with:
