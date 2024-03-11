@@ -23,11 +23,19 @@ jobs:
           script: |
             console.log("test");
             console.log(context);
-            if (github.event_name === 'pull_request') {
+            if (context.eventName === 'pull_request') {
               // core.exportVariable('DT_REF', github.ref);
             }
-            else if (github.event_name === 'push' && github.ref_name.lastIndexOf("#") === 0) {
-              core.exportVariable('DT_REF', github.ref_name.replace(/#/, '_'));
+            else if (context.eventName === 'push') {
+              const branch = context.ref.split('/').reverse()[0];
+
+              console.log(branch);
+              if (branch.lastIndexOf('#') === 0) {
+                core.exportVariable('DT_REF', github.ref_name.replace(/#/, '_'));
+              }
+              else if (branch === 'master') {
+                core.exportVariable('DT_REF', 'master');
+              }
             }
       # - uses: docker/setup-buildx-action@v3
       #   name: Set up Docker Buildx
